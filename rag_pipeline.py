@@ -1,10 +1,8 @@
 """
-Production RAG Pipeline  —  Section 6 Implementation
+Production RAG Pipeline Implementation
 =====================================================
-Demonstrates: correct embeddings, robust retrieval, grounded prompt,
+Demonstrates: embeddings, robust retrieval, grounded prompt,
 edge case handling, and bottleneck awareness.
-
-Adapted from the Athene prep guide to run with synthetic insurance data.
 
 MODES
 -----
@@ -31,8 +29,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # ── Constants ─────────────────────────────────────────────────────────────────
-# RULE 1: The same model MUST be used at index time and query time.
-EMBEDDING_MODEL   = "text-embedding-3-small"   # OpenAI — 1536 dims
+EMBEDDING_MODEL   = "text-embedding-3-small"   # OpenAI — 1536 dims; The same model MUST be used at index time and query time.
 EMBEDDING_DIM     = 1536                        # Validate after every embed call
 LOCAL_EMBED_MODEL = "all-MiniLM-L6-v2"         # sentence-transformers — 384 dims
 
@@ -47,7 +44,7 @@ MIN_CHUNK_CHARS   = 50      # Filter undersized chunks — they are noise
 
 DEFAULT_TOP_K     = 5
 MAX_CONTEXT_TOKENS = 3_000  # Stay within LLM context budget
-# Note: Threshold differs by embedding model:
+# Threshold differs by embedding model:
 #   OpenAI cosine similarity  → 0.70 is a reliable cutoff
 #   sentence-transformers L2  → LangChain normalizes; 0.20 works better
 OPENAI_SCORE_THRESHOLD = 0.70
@@ -64,7 +61,7 @@ else:
     logger.info("DEMO MODE: using local sentence-transformers (no API key required)")
 
 # ── Embeddings ─────────────────────────────────────────────────────────────────
-# NOTE: instantiate once and reuse — not per-request.
+# Instantiate once and reuse — not per-request.
 # Instantiating per-request wastes memory and, for OpenAI, triggers extra overhead.
 
 def _build_embedding_model():

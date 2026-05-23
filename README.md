@@ -1,6 +1,6 @@
-# Athene RAG Pipeline — Practice Project
+# RAG Pipeline — Practice Project
 
-Production-grade RAG system built for interview prep. Covers correct embeddings,
+Simple Production-grade RAG system. Includes embeddings,
 robust retrieval, grounded prompting, edge case handling, and bottleneck awareness.
 
 ---
