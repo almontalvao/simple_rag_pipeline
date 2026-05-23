@@ -1,0 +1,24 @@
+# RAG Pipeline — Dependencies
+# Install: pip install -r requirements.txt
+#
+# DEMO MODE  (no API key): all packages below are needed.
+# PRODUCTION MODE (OpenAI): also needs OPENAI_API_KEY set in environment.
+
+# Core LangChain
+langchain>=0.2.0
+langchain-community>=0.2.0
+langchain-core>=0.2.0
+langchain-text-splitters>=0.2.0
+
+# Vector store
+faiss-cpu>=1.7.4
+
+# Embeddings (demo mode — local, no API key)
+sentence-transformers>=2.7.0
+
+# Embeddings (production mode — OpenAI)
+langchain-openai>=0.1.0
+openai>=1.30.0
+
+# Utilities
+numpy>=1.26.0
